@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params) # 非最终版本
     if @user.save
+      log_in(@user)
       flash[:success] = "Welcome to Sample App!" # 这里的flash content实际是为后面view中用到作准备
       redirect_to @user # or user_url(@user)
     else
