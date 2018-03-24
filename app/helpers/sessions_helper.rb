@@ -40,4 +40,21 @@ module SessionsHelper
     cookies.delete(:remember_token)
   end
 
+  def current_user?(user)
+    user == current_user
+  end
+
+  # 存储最初访问的地址
+  def store_location
+    session[:forwarding_url] = request.original_url if request.get? # get以外的表单会发生重复提交的冲突
+  end
+
+  # 重定向到session中存的之前访问页面的地址或默认地址
+  def redirect_back_or(default)
+    redirect_to(session[:forwarding_url] || default)
+    session.delete(:forwarding_url)
+  end
+
+
+
 end
