@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :admin_user, only: :destroy
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.where(activated: true).paginate(page: params[:page])
   end
 
   def new
@@ -22,9 +22,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params) # 非最终版本
     if @user.save
-      log_in(@user)
-      flash[:success] = "Welcome to Sample App!" # 这里的flash content实际是为后面view中用到作准备
-      redirect_to @user # or user_url(@user)
+      # log_in(@user)
+      @user.send_activation_email
+      flash[:info] = "Please check your email to activate your account" # 这里的flash content实际是为后面view中用到作准备
+      redirect_to root_url
     else
       render "new"
     end
