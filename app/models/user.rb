@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token, :activation_token
+  attr_accessor :remember_token, :activation_token, :reset_token
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   has_secure_password
@@ -45,12 +45,26 @@ class User < ApplicationRecord
     self.update_columns(activated: true, activated_at: Time.zone.now)
   end
 
-    private
+  def create_activation_digest
+    self.activation_token = User.new_token
+    self.activation_digest = User.digest(activation_token)
+  end
 
-    def create_activation_digest
-      self.activation_token = User.new_token
-      self.activation_digest = User.digest(activation_token)
-    end
+  def create_reset_digest
+    self.reset_token = User.new_token
+    self.reset_digest = User.digest(reset_token)
+    self.update_columns(reset_sent_at: Time.zone.now, reset_digest: reset_digest)
+  end
+
+  def send_password_reset_email
+    UserMailer.password_reset(self).deliver_now
+  end
+
+  def password_reset_expired?
+    reset_sent_at < 2.hours.ago
+  end
+
+    private
 
     def downcase_email
       self.email.downcase!
