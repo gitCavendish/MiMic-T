@@ -35,6 +35,11 @@ gem 'bcrypt', '3.1.11'
 gem 'jquery-rails'
 gem 'faker'
 gem 'will_paginate'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog-aws'
+gem 'nokogiri'
+gem 'bootstrap-will_paginate'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
