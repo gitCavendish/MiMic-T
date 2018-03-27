@@ -2,7 +2,21 @@ class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
   has_secure_password
   has_many :microposts, dependent: :destroy
-
+  # user_id 存入 relationships table 中时是以 follwer_id 名称存在左边的column中的
+  # 因此要指明关联的Model 以及自己的id被用作了哪个外部键
+  # user 被删除时，又它生出的关联也应该删除
+  has_many :active_relationships, class_name: "Relationship",
+                                  foreign_key: "follower_id",
+                                  dependent: :destroy
+  has_many :following, through: :active_relationships, source: :followed
+  # 这里的 :active_relationships 是指与 user 关联的所有 relationships 条目
+  # 比如 [1,3] [1,6] [1, 89] (假设user.id 是 1)
+  # followed 实际值 user 对象，在 Relationship.rb 中 `belongs_to :followed, class_name: "User" `
+  # following 是一个表意名称
+  has_many :passive_relationships, class_name: "Relationship",
+                                   foreign_key: "followed_id",
+                                   dependent: :destroy
+  has_many :followers, through: :passive_relationships, source: :follower # 可省略
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
@@ -68,7 +82,23 @@ class User < ApplicationRecord
   end
 
   def feed
-    Micropost.where("user_id=?", self.id)
+    following_ids = "SELECT followed_id FROM relationships WHERE follower_id = :user_id"
+    Micropost.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: self.id)
+  end
+
+
+  # user.following 是通过 has_many through 实现
+  # 复杂的写法是 user.active_relationships.create(followed_id: other_user.id)
+  def follow(other_user)
+    following << other_user
+  end
+
+  def unfollow(other_user)
+    following.delete(other_user)
+  end
+
+  def following?(other_user)
+    following.include?(other_user)
   end
 
     private

@@ -1,10 +1,6 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
-
   def setup
     @user = User.new(name: "Example User", email: "user@example.com", password: "foobar", password_confirmation: "foobar")
   end
@@ -74,5 +70,63 @@ class UserTest < ActiveSupport::TestCase
       @user.destroy
     end
   end
+
+  test "should follow and unfollow a user(active perspective)" do
+    michael = users(:michael)
+    archer = users(:archer)
+    assert_not michael.following?(archer)
+    michael.follow(archer)
+    assert michael.following?(archer)
+    michael.unfollow(archer)
+    assert_not michael.following?(archer)
+  end
+
+  test "should follow and unfollow a user(passive perspective)" do
+    michael = users(:michael)
+    archer = users(:archer)
+    assert_not michael.following?(archer)
+    michael.follow(archer)
+    assert archer.followers.include?(michael)
+    michael.unfollow(archer)
+    assert_not archer.followers.include?(michael)
+  end
+
+  test "feed should have the right posts" do
+    michael = users(:michael)
+    archer = users(:archer)
+    lana = users(:lana)
+    # following 们发布的 posts
+    lana.microposts.each do |post_following|
+      assert michael.feed.include?(post_following)
+    end
+    # user 自己发布的 posts
+    michael.microposts.each do |self_post|
+      assert michael.feed.include?(self_post)
+    end
+    # 未关注用户的 posts (应该不显示)
+    archer.microposts.each do |unfollowed_post|
+      assert_not michael.feed.include?(unfollowed_post)
+    end
+  end
+
+# relationships.yml
+
+  # one:
+  #   follower: michael
+  #   followed: lana
+  #
+  # two:
+  #   follower: michael
+  #   followed: malory
+  #
+  # three:
+  #   follower: lana
+  #   followed: michael
+  #
+  # four:
+  #   follower: archer
+  #   followed: michael
+  #
+
 
 end
