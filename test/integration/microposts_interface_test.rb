@@ -2,7 +2,7 @@ require 'test_helper'
 
 class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
   def setup
-    @user = users(:michael)
+    @user = users(:caven)
   end
 
   test "micropost interface" do
@@ -16,12 +16,11 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
     assert_select 'div#error_explanation'
     #有效提交post
     content = "This micropost really ties the room together"
-    picture = fixture_file_upload('test/fixtures/rails.png', 'image/png')
     assert_difference "Micropost.count", +1 do
-      post microposts_path, params: {micropost: { content: content, picture: picture}}
+      post microposts_path, params: {micropost: { content: content}}
     end
 
-    assert assigns(:micropost).picture?
+    # assert assigns(:micropost).picture?
     follow_redirect!
     assert_match content, response.body
     #删除micropost

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class MicropostTest < ActiveSupport::TestCase
   def setup
-    @user = users(:michael)
+    @user = users(:caven)
     @micropost = @user.microposts.new(content: "Lorem ipsum")
   end
 

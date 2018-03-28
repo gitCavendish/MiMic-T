@@ -1,6 +1,12 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+// mobile device
+
+@media (min-width: 576px) {
+
+}
+
 // variables mixins etc
 
 $light-grey: #777;

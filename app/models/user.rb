@@ -30,6 +30,8 @@ class User < ApplicationRecord
             uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
+  mount_uploader :icon, UserIconUploader
+
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)

@@ -72,60 +72,60 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "should follow and unfollow a user(active perspective)" do
-    michael = users(:michael)
+    caven = users(:caven)
     archer = users(:archer)
-    assert_not michael.following?(archer)
-    michael.follow(archer)
-    assert michael.following?(archer)
-    michael.unfollow(archer)
-    assert_not michael.following?(archer)
+    assert_not caven.following?(archer)
+    caven.follow(archer)
+    assert caven.following?(archer)
+    caven.unfollow(archer)
+    assert_not caven.following?(archer)
   end
 
   test "should follow and unfollow a user(passive perspective)" do
-    michael = users(:michael)
+    caven = users(:caven)
     archer = users(:archer)
-    assert_not michael.following?(archer)
-    michael.follow(archer)
-    assert archer.followers.include?(michael)
-    michael.unfollow(archer)
-    assert_not archer.followers.include?(michael)
+    assert_not caven.following?(archer)
+    caven.follow(archer)
+    assert archer.followers.include?(caven)
+    caven.unfollow(archer)
+    assert_not archer.followers.include?(caven)
   end
 
   test "feed should have the right posts" do
-    michael = users(:michael)
+    caven = users(:caven)
     archer = users(:archer)
     lana = users(:lana)
     # following 们发布的 posts
     lana.microposts.each do |post_following|
-      assert michael.feed.include?(post_following)
+      assert caven.feed.include?(post_following)
     end
     # user 自己发布的 posts
-    michael.microposts.each do |self_post|
-      assert michael.feed.include?(self_post)
+    caven.microposts.each do |self_post|
+      assert caven.feed.include?(self_post)
     end
     # 未关注用户的 posts (应该不显示)
     archer.microposts.each do |unfollowed_post|
-      assert_not michael.feed.include?(unfollowed_post)
+      assert_not caven.feed.include?(unfollowed_post)
     end
   end
 
 # relationships.yml
 
   # one:
-  #   follower: michael
+  #   follower: caven
   #   followed: lana
   #
   # two:
-  #   follower: michael
+  #   follower: caven
   #   followed: malory
   #
   # three:
   #   follower: lana
-  #   followed: michael
+  #   followed: caven
   #
   # four:
   #   follower: archer
-  #   followed: michael
+  #   followed: caven
   #
 
 
