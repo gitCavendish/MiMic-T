@@ -1,7 +1,9 @@
-
 <div class="row">
   <%= render 'static_pages/logged_in_scope'%>
   <%= render 'shared/feed'%>
-</div>
+  <div>
+      <%= link_to "Sign Up Now!", signup_path, class: "btn btn-lg btn-primary"%>
+      <%= link_to "Login as Sample user", fake_login_path, method: :post,class: "btn btn-lg btn-danger"%>
+  </div>
 
-  <%= render 'static_pages/visitor_scope'%>
+</div>
