@@ -115,7 +115,6 @@ footer {
 
 aside {
   section.user_info {
-    text-align: center;
     margin-top: 20px;
   }
   section {
@@ -136,11 +135,7 @@ aside {
       letter-spacing: -1px;
       margin: 10px 0 5px 2px;
     }
-    a {
-      h1 {
-        text-align: center;
-      }
-    }
+
   }
 }
 
@@ -420,6 +415,11 @@ i#post_likes.material-icons {
   background-image: url('8.png');
   background-repeat: no-repeat;
   background-size: contain;
+}
+
+#relation {
+  width: 150px;
+  display: block;
 }
 
 

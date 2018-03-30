@@ -1,9 +1,17 @@
 <% if current_user %>
-<%= link_to current_user do %>
-<%= image_tag(current_user.icon, size: 100)%>
-  <h1><%= current_user.name %></h1>
-<% end %>
-<span><%= pluralize(current_user.microposts.count, "micropost")%></span>
+  <%= link_to current_user do %>
+  <%= image_tag(current_user.icon, size: 100)%>
+    <h1><%= current_user.name %> <label class="label label-danger"> Admin</label></h1>
+    <% if current_user.admin? %>
+
+    <% end %>
+  <% end %>
+  <span><%= pluralize(current_user.microposts.count, "micropost")%></span>
 <% else %>
   <%= image_tag('8.png', size: 100)%>
+  <h4 style="color: tomato">Welcome! visitor.</h4>
+  <%= link_to "Login as a sample user to explore more...", fake_login_path, method: :post,class: "btn btn-xs btn-danger"%>
+  <h4>Or</h4>
+  <%= link_to "Signup now", signup_path, class: "btn btn-xs btn-default"%>
+
 <% end %>
