@@ -5,10 +5,14 @@
     <%= f.text_area :content, placeholder: "Compose new micropost ..."%>
   </div>
 
+  <%= f.fields_for @micropost.buckets.new do |ff| %>
+    <label for="multi-file-upload" class="custom-file-upload">
+      <i class="material-icons">add_a_photo</i><span>Add photos<small> ( Less than 6 photos per time.)</small></span>
+      <%= ff.file_field :picture, multiple: true, id: "multi-file-upload"%>
+    </label>
+  <% end %>
+
   <%= f.submit "Post", class: "btn btn-primary"%>
-  <!-- <span class="picture">
-    <%= f.file_field :pictures, multiple: true, accept: 'image/jpeg, image/gif, image/png' %>
-  </span> -->
 
 <% end %>
 

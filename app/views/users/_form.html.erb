@@ -1,8 +1,15 @@
 <%= form_for @user do |f| %>
   <%= render 'shared/error_messages', object: f.object%>
+  <div class="user_icon row text-center">
+    <div class="existed_icon">
+      <%= image_tag (@user.icon), size: '150x150'%>
+    </div>
+    <label for="file-upload" class="custom-file-upload">
+      <i class="material-icons md-48">add_a_photo</i> Change avatar
+      <%= f.file_field :icon, class: "btn btn-secondary btn-md", id: "file-upload"%>
+    </label>
 
-  <%= f.label "Upload your avatar"%>
-  <%= f.file_field :icon%>
+  </div>
 
   <%= f.label :name %>
   <%= f.text_field :name, class: "form-control"%>

@@ -1,5 +1,8 @@
 <div class="col-md-8">
-  <h3>Micropost Feed</h3>
+
+  <%= link_to root_path do %>
+    <%= image_tag 'color_run.png', id: "color_run"%>
+  <% end %>
 <% if @feed_items.any? %>
   <ol class="microposts">
     <%= render @feed_items %>

@@ -2,9 +2,16 @@ class MicropostsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user, only: :destroy
 
+
   def create
     @micropost = current_user.microposts.build(micropost_params)
+
     if @micropost.save
+      if params[:micropost][:bucket]
+        params[:micropost][:bucket][:picture].each do |pic|
+          @micropost.buckets.create(picture: pic)
+        end
+      end 
       flash[:success] = "Micropost created!"
       redirect_to root_url
     else
@@ -23,7 +30,7 @@ class MicropostsController < ApplicationController
   private
 
     def micropost_params
-      params.require(:micropost).permit(:content)
+      params.require(:micropost).permit(:content, bucket_attributes: [:id, :micropost_id, :picture])
     end
 
     def correct_user

@@ -1,32 +1,48 @@
-User.create!(name: "Example User",
+User.create!(name: "caven xu",
              email: "example@mimi-t.org",
-             password: "foobar",
-             password_confirmation: "foobar",
+             password: "111111",
+             password_confirmation: "111111",
              admin: true,
              activated: true,
-             activated_at: Time.zone.now
+             activated_at: Time.zone.now,
+             icon: open('app/assets/images/8.png')
              )
 
-99.times do |n|
+def fetch_fake_images_from(path)
+  dir = Dir.new(path)
+  image_names = dir.entries.delete_if { |entry| entry =~ /^\./ }
+  image_url = path + image_names.sample
+end
+
+
+
+50.times do |n|
   name = Faker::Name.name
   email = "example-#{n+1}@mimic-t.org"
   password = "password"
+  fake_image = open ("app")
   User.create!(
                name: name,
                email: email,
                password: password,
                password_confirmation: password,
                activated: true,
-               activated_at: Time.zone.now
+               activated_at: Time.zone.now,
+               remote_icon_url: "http://placebeard.it/g/200/200"
               )
 end
 
 users = User.order(:created_at).take(6)
-50.times do
-  content = Faker::Lorem.sentence(5)
+10.times do
+  content = Faker::Lorem.paragraph(rand(1..3))
   users.each { |user| user.microposts.create!(content: content) }
 end
 
+Micropost.all.each do |micropost|
+ rand(1..6).times do
+   micropost.buckets.create(remote_picture_url: "https://placeimg.com/200/200/any")
+ end
+end
 # following relationships
 
 users = User.all

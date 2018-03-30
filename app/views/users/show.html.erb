@@ -3,7 +3,7 @@
   <aside class="col-md-4">
     <section class="user-info">
       <h1>
-        <%= gravatar_for @user %>
+        <%= image_tag @user.icon, size: "150x150" %>
         <%= @user.name %>
       </h1>
     </section>

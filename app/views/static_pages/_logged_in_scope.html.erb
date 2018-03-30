@@ -8,4 +8,15 @@
     <section class="micropost_form">
       <%= render 'shared/micropost_form'%>
     </section>
+    <section class="hot_post">
+      <div>
+        <h4>Hotest posts</h4>
+          <% Micropost.last(10).each do |post|%>
+            <%= link_to image_tag(post.user.icon, size: 30), post.user, class: "mini_icon" %>
+            <span><%= link_to post.user.name, post.user %>: </span>
+            <p><small><%= post.content.truncate(70)%></small></p>
+          <% end %>
+        </details>
+      </div>
+    </section>
   </aside>

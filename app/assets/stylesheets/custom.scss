@@ -1,11 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-// mobile device
-
-@media (min-width: 576px) {
-
-}
 
 // variables mixins etc
 
@@ -30,7 +25,8 @@ $gray-mediumn-light: #eaeaea;
 
 // univsersal
 body {
-  padding-top: 60px;
+  padding-top: 0px;
+  max-width: 1600px;
 }
 
 section {
@@ -78,13 +74,9 @@ p {
 // header
 
 #logo {
-  float: left;
-  margin-right: 10px;
-  font-size: 1.7em;
   color: #fff;
   text-transform: uppercase;
   letter-spacing: -1px;
-  padding-top: 9px;
   font-weight: bold;
   &:hover {
     color: #fff;
@@ -123,6 +115,7 @@ footer {
 
 aside {
   section.user_info {
+    text-align: center;
     margin-top: 20px;
   }
   section {
@@ -139,7 +132,6 @@ aside {
     }
     h1 {
       font-size: 1.4em;
-      text-align: left;
       letter-spacing: -1px;
       margin-bottom: 3px;
       margin-top: 0px;
@@ -161,17 +153,17 @@ aside {
   margin-top: 0;
   padding: 0;
   a {
-    float: left;
+    float:left;
     padding: 0 10px;
-    border-left: 1px solid $gray-lighter;
-    color: gray;
+    margin: 3px;
+    color: #3764a8;
     &:first-child {
       padding-left: 0;
       border: 0;
     }
     &:hover {
       text-decoration: none;
-      color: blue;
+      color: tomato;
     }
   }
   strong {
@@ -246,6 +238,20 @@ input {
 
 // microposts
 
+.home_page_image {
+  display: inline-block;
+  margin: 4px 2px;
+}
+
+img#color_run {
+  opacity: 0.85;
+  border-radius: 20px;
+  margin-top: 20px;
+  width: 80%;
+  height:inherit;
+  margin-bottom: 20px;
+}
+
 .microposts {
   list-style: none;
   padding: 0;
@@ -259,16 +265,17 @@ input {
   }
   .content {
     display: block;
-    margin-left: 60px;
+    margin: 5px 80px 5px 0;
     img {
       display: block;
       padding: 5px 0;
+      margin-top: 5px;
     }
   }
   .timestamp {
-    color: $gray-lighter;
+    color: lightgrey;
     display: block;
-    margin-left: 60px;
+    // margin-left: 60px;
   }
   .gravatar {
     float: left;
@@ -288,5 +295,158 @@ span.picture {
   margin-top: 10px;
   input {
     border: 0;
+  }
+}
+
+//
+// small version for user icon
+
+a.mini_icon {
+  img {
+    border-radius: 100%;
+  }
+}
+
+.hot_post {
+  p {
+    color: $light-grey
+  }
+}
+
+// file upload icon
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 12px 12px;
+    cursor: pointer;
+}
+
+.collapse_list {
+  font-size: 4rem;
+  color: tomato;
+}
+
+nav {
+  width: 100%;
+  background: black;
+  ul {
+    width: 70%;
+    margin: 0 auto;
+    padding: 0;
+    li {
+      font-size: 1.6rem;
+      display: inline-block;
+      list-style: none;
+      padding: 10px 30px;
+      &:hover {
+        background: tomato;
+      }
+      a {
+        color: white;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.toggle {
+  width: 100%;
+  padding: 10px 20px;
+  text-align: right;
+  box-sizing: border-box;
+  font-size: 2em;
+    display: none;
+}
+
+#dropdown-ul {
+  text-align: center;
+  li {
+    width: 100%;
+  }
+}
+
+  .post_info {
+    width: 90%;
+    text-align: left;
+  }
+
+
+
+// hidden hot posts  ----------------------------------------------------------
+
+@media only screen and (max-width: 1000px) {
+  .hot_post {
+    display: none;
+  }
+
+
+}
+
+
+// hidden hot posts  ----------------------------------------------------------
+
+@media only screen and (max-width: 1366px) {
+
+  img#color_run {
+    border-radius: 20px;
+    margin-top: 20px;
+    width: 100%;
+    height:inherit;
+  }
+
+
+
+
+
+// hide nav & show toggle button in small screen -------------------------------
+
+@media (max-width: 768px) {
+
+.toggle {
+      display: block;
+   }
+nav {
+  ul {
+  width: 100%;
+  display: none;
+  li {
+    display: block;
+    text-align: center;
+  }
+ }
+}
+
+.active {
+  display: block;
+}
+
+.user_info {
+  text-align: center;
+  h1 {
+    text-align: center;
+  }
+}
+
+.post_info {
+  text-align: justify;
+  width: 100%
+}
+}
+
+
+}
+
+// xs device ------------------------------------------------------------------
+
+@media only screen and (max-width: 600px) {
+  .microposts {
+    text-align: center;
+    .content {
+      margin: 0;
+    }
   }
 }
