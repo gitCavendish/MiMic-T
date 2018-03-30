@@ -11,7 +11,8 @@
         <% end %>
       <% end %>
     <% end %>
-  <div class="post_info row align-items-center">
+
+  <div class="post_info row">
     <div class="timestamp col-xs-12 col-md-7">
     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
       <% if current_user?(micropost.user)%>
@@ -19,10 +20,42 @@
       <% end %>
     </div>
     <div class="col-xs-6 col-md-3">
-      <span>comments</span>
+      <span><%= micropost.comments.count %> </span>
+      <i class="material-icons post_comments" id="post-comments-<%= micropost.id%>">comment</i>
     </div>
     <div class="col-xs-6 col-md-2">
-      <span>vote</span>
+
+      <span>
+        <% if current_user %>
+          <%= link_to micropost.likes.count, like_post_user_path(micropost), method: :post %>
+          <% else %>
+          <%= micropost.likes.count %>
+          <% end %>
+        <i class="material-icons" id="post_likes">thumb_up</i>
+      </span>
+
     </div>
   </div>
+  <% if !micropost.comments.empty? %>
+  <div class="row comments_body">
+    <ul id="comments-<%= micropost.id%>">
+        <% micropost.comments.last(5).each do |comment|%>
+        <li><span><%= link_to comment.user.name, comment.user %>: </span><%= comment.message.truncate(40)%></li>
+        <% end %>
+    </ul>
+    <%= form_for :comment, url: comments_path(micropost), method: :post do |f|%>
+      <%= f.text_area :message, class: "form-control"%>
+      <%= f.submit "Submit", class: "btn btn-small btn-default"%>
+    <% end %>
+  </div>
+  <% end %>
+
+
+
 </li>
+
+<script>
+$(".post_info").click(function(event) {
+  $(this).next().toggleClass('active');
+});
+</script>

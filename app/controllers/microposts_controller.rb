@@ -11,7 +11,7 @@ class MicropostsController < ApplicationController
         params[:micropost][:bucket][:picture].each do |pic|
           @micropost.buckets.create(picture: pic)
         end
-      end 
+      end
       flash[:success] = "Micropost created!"
       redirect_to root_url
     else

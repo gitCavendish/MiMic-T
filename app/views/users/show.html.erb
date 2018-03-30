@@ -2,8 +2,8 @@
 <div class="row">
   <aside class="col-md-4">
     <section class="user-info">
+      <%= image_tag @user.icon, size: "150x150" %>
       <h1>
-        <%= image_tag @user.icon, size: "150x150" %>
         <%= @user.name %>
       </h1>
     </section>

@@ -63,6 +63,17 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+  def like_post
+    micropost = Micropost.find(params[:id])
+    like = micropost.likes.find_by(user_id: current_user.id)
+    if like
+      like.destroy
+    else
+       micropost.likes.create(user_id: current_user.id)
+    end
+    redirect_back_or root_path
+  end
+
     private
 
     def admin_user

@@ -14,11 +14,14 @@
 
 //= require bootstrap
 //= require rails-ujs
-//= require turbolinks
 //= require_tree .
 
 $(document).ready(function(){
   $('.menu').click(function(){
     $('ul').toggleClass('active');
   })
+});
+
+$('img').error(function(){
+        $(this).attr('src', '8.png');
 });

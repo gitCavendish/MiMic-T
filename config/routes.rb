@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+
   root 'static_pages#home'
 
+  post '/fake_login', to: 'application#fake_login'
   get '/help', to: 'static_pages#help'
   get '/about', to: 'static_pages#about'
   get '/contact', to: 'static_pages#contact'
@@ -16,14 +18,18 @@ Rails.application.routes.draw do
 
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :edit, :create, :update]
-  resources :microposts, only: [:create, :destroy] do
+  resources :microposts do
     member do
       resources :buckets
+      resources :comments
     end
   end
 
+  resources :comments
+
   resources :users do
     member do
+      post :like_post
       get :following, :followers
     end
   end

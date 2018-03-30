@@ -5,6 +5,8 @@ class Micropost < ApplicationRecord
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 300 }
   accepts_nested_attributes_for :buckets
+  has_many :likes, dependent: :destroy
+  has_many :comments, dependent: :destroy
   #validate :picture_size
   # validate :check_max_files
 

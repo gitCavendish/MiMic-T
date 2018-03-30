@@ -41,8 +41,13 @@ end
 Micropost.all.each do |micropost|
  rand(1..6).times do
    micropost.buckets.create(remote_picture_url: "https://placeimg.com/200/200/any")
+   micropost.comments.create(user_id: User.all.ids.sample, message: Faker::Lorem.paragraph)
+   micropost.likes.create(user_id: User.all.ids.sample)
  end
 end
+
+
+
 # following relationships
 
 users = User.all

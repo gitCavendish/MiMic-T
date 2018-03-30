@@ -1,13 +1,5 @@
-<div class="jumbotron">
-  <%= image_tag "kitten.jpg", size: '100%'%>
+<div>
   <h1>mimic-T</h1>
-  <h2>
-    This is the home page for the
-      <a href="#">caven xu</a>
-    mimic-Tlication.
-  </h2>
     <%= link_to "Sign Up Now!", signup_path, class: "btn btn-lg btn-primary"%>
+    <%= link_to "Login as Sample user", fake_login_path, method: :post,class: "btn btn-lg btn-danger"%>
 </div>
-
-<%= link_to image_tag("rails.png", alt: "Rails logo"), 'http://rubyonrails.org/'%>
-<%#= image_tag("kitten.jpg", alt: "Kitten")%>

@@ -1,8 +1,7 @@
-<% if current_user %>
+
 <div class="row">
   <%= render 'static_pages/logged_in_scope'%>
   <%= render 'shared/feed'%>
 </div>
-<% else %>
+
   <%= render 'static_pages/visitor_scope'%>
-<% end %>

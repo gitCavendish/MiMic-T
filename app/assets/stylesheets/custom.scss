@@ -131,10 +131,15 @@ aside {
       line-height: 1;
     }
     h1 {
-      font-size: 1.4em;
+      text-align: justify;
+      font-size: 1.1em;
       letter-spacing: -1px;
-      margin-bottom: 3px;
-      margin-top: 0px;
+      margin: 10px 0 5px 2px;
+    }
+    a {
+      h1 {
+        text-align: center;
+      }
     }
   }
 }
@@ -245,7 +250,7 @@ input {
 
 img#color_run {
   opacity: 0.85;
-  border-radius: 20px;
+  border-radius: 10px;
   margin-top: 20px;
   width: 80%;
   height:inherit;
@@ -370,10 +375,52 @@ nav {
 }
 
   .post_info {
+    padding-top: 10px;
     width: 90%;
     text-align: left;
   }
 
+.post_comments {
+  vertical-align: middle;
+  padding-top: 3px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+i#post_likes.material-icons {
+  padding-bottom: 8px;
+}
+#post_likes {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+
+.comments_body {
+  display: none;
+  ul {
+    text-align: left;
+    li {
+      list-style: none;
+    }
+  }
+}
+
+.active {
+  display: block;
+}
+
+#unlogged_image {
+  background-image: url('bg-1.png');
+
+}
+
+.existed_icon img {
+  background-image: url('8.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
 
 
 // hidden hot posts  ----------------------------------------------------------
@@ -421,15 +468,9 @@ nav {
 }
 
 .active {
-  display: block;
+  display: block !important;
 }
 
-.user_info {
-  text-align: center;
-  h1 {
-    text-align: center;
-  }
-}
 
 .post_info {
   text-align: justify;
