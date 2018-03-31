@@ -1,0 +1,3 @@
+$(".likes-count-<%= @micropost.id%>").text(function(){
+  $(this).text().val("<%= @likes %>");
+})

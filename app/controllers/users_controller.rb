@@ -64,14 +64,28 @@ class UsersController < ApplicationController
   end
 
   def like_post
-    micropost = Micropost.find(params[:id])
-    like = micropost.likes.find_by(user_id: current_user.id)
-    if like
-      like.destroy
+    @micropost = Micropost.find(params[:id])
+    like = @micropost.likes.find_by(user_id: current_user.id)
+    if !like
+      @micropost.likes.create(user_id: current_user.id)
+      @likes = @micropost.likes.count
+      respond_to do |format|
+         format.html { redirect_back_or root_path}
+         format.js
+      end
     else
-       micropost.likes.create(user_id: current_user.id)
+      unlike_post(like)
     end
-    redirect_back_or root_path
+  end
+
+  def unlike_post(like)
+    @micropost = Micropost.find(params[:id])
+    like.destroy
+    @likes = @micropost.likes.count
+    respond_to do |format|
+       format.html { redirect_back_or root_path}
+       format.js
+    end
   end
 
     private

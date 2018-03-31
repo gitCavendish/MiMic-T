@@ -384,10 +384,15 @@ nav {
 
 i#post_likes.material-icons {
   padding-bottom: 8px;
+  color: tomato;
 }
 #post_likes {
   vertical-align: middle;
   display: inline-block;
+}
+
+.post_liked {
+  color: grey;
 }
 
 

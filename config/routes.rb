@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   resources :users do
     member do
       post :like_post
+      delete :unlike_post
       get :following, :followers
     end
   end
