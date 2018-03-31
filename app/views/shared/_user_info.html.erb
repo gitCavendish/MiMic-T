@@ -9,7 +9,7 @@
   <span><%= pluralize(current_user.microposts.count, "micropost")%></span>
 <% else %>
   <%= image_tag('8.png', size: 100)%>
-  <h4 style="color: tomato">Welcome! visitor.</h4>
+  <h4 style="color: tomato">Welcome! Stranger.</h4>
   <%= link_to "Login as a sample user to explore more...", fake_login_path, method: :post,class: "btn btn-xs btn-danger"%>
   <h4>Or</h4>
   <%= link_to "Signup now", signup_path, class: "btn btn-xs btn-default"%>

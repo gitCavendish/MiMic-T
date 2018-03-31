@@ -11,7 +11,7 @@ class CampsController < ApplicationController
   # GET /camps/1
   # GET /camps/1.json
   def show
-    @participators = User.all.sample(20)
+    @participators = @camp.participators
   end
 
   # GET /camps/new
@@ -61,6 +61,22 @@ class CampsController < ApplicationController
       format.html { redirect_to camps_url, notice: 'Camp was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def participate
+    @relation = current_user.participator_relationships.new
+    if @relation.camp_id = params[:id]
+      @relation.save
+      flash[:success] = "Successfully participate this camp."
+      redirect_back fallback_location: camps_path
+    end
+  end
+
+  def quit
+    relation = current_user.participator_relationships.find_by(camp_id: params[:id])
+    relation.destroy
+    flash[:warning] = "Successfully quit this camp."
+    redirect_back fallback_location: camps_path
   end
 
   private

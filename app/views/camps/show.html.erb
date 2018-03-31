@@ -7,12 +7,16 @@
       <% else %>
         <%= image_tag('tennis.jpg', class: "img-camps")%>
       <% end %>
-    <h3 class="participators">Participators:</h3>
-    <div class="participators_img">
-        <% @participators.each do |user| %>
-          <%=link_to (image_tag user.icon, class:"mini_icon", size: "30"), user%>
-        <% end %>
-    </div>
+    <% if !@participators.empty?%>
+      <h3 class="participators">Participators:</h3>
+      <div class="participators_img">
+          <% @participators.each do |user| %>
+            <%=link_to (image_tag user.icon, class:"mini_icon", size: "30"), user%>
+          <% end %>
+      </div>
+      <% else %>
+      <p>Waiting for you ...</p>
+    <% end %>
   </div>
 </div>
 
@@ -48,4 +52,10 @@
 <% if current_user && current_user == @camp.user%>
   <%= link_to 'Edit', edit_camp_path(@camp), class: "btn btn-danger btn-sm" %> |
   <%= link_to 'delete', camp_path(@camp), method: :delete, data: {confirm: "Are you suer?"}, class: "btn btn-danger btn-sm"%>
+<% elsif current_user && !current_user.participated_camps.include?(@camp)%>
+  <%= link_to "Participate", participate_camp_path(@camp), method: :post, class: "btn btn-warning btn-sm"%>
+<% elsif current_user && current_user.participated_camps.include?(@camp) %>
+  <%= link_to "Quit Camp", quit_camp_path(@camp), method: :delete, class: "btn btn-default btn-sm"%>
+<% else %>
+  <%= link_to "Login for participating", login_path, class: "btn btn-warning btn-md"%>
 <% end %>

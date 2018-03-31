@@ -1,3 +1,5 @@
+User.destroy_all
+
 User.create!(name: "caven xu",
              email: "example@mimi-t.org",
              password: "111111",
@@ -5,7 +7,7 @@ User.create!(name: "caven xu",
              admin: true,
              activated: true,
              activated_at: Time.zone.now,
-             icon: open('app/assets/images/8.png')
+             icon: open('app/assets/images/admin.jpg')
              )
 
 def fetch_fake_images_from(path)
@@ -41,10 +43,20 @@ end
 Micropost.all.each do |micropost|
  rand(1..6).times do
    micropost.buckets.create(remote_picture_url: "https://placeimg.com/200/200/any")
-   micropost.comments.create(user_id: User.all.ids.sample, message: Faker::Lorem.paragraph)
+   micropost.comments.create(user_id: User.all.ids.sample, message: Faker::Lorem.sentence)
    micropost.likes.create(user_id: User.all.ids.sample)
  end
 end
+
+images = ['app/assets/images/tennis.jpg', 'app/assets/images/baseball.jpg', 'app/assets/images/baseball-w.jpg', 'app/assets/images/running.jpg']
+
+Camp.create(user_id: User.all.sample.id,
+            title: Faker::Lorem.sentence,
+            venue: Faker::Address.street_address,
+            intro: Faker::Lorem.paragraph(rand(5..10)),
+            time: Faker::Time.forward(60, :morning),
+            picture: open('app/assets/images/color_run.png')
+          )
 
 20.times do |n|
   Camp.create(user_id: User.all.sample.id,
@@ -52,8 +64,12 @@ end
               venue: Faker::Address.street_address,
               intro: Faker::Lorem.paragraph(rand(5..10)),
               time: Faker::Time.forward(60, :morning),
-              picture: open('app/assets/images/color_run.png'),
-  )
+              picture: open(images.sample)
+            )
+end
+
+Camp.all.each do |camp|
+  camp.participators << User.all.sample(rand(8..18))
 end
 
 

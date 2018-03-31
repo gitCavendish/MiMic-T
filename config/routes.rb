@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
-  resources :camps
+  resources :camps do
+    member do
+      post 'participate'
+      delete 'quit'
+    end
+  end
   root 'static_pages#home'
 
   post '/fake_login', to: 'application#fake_login'
