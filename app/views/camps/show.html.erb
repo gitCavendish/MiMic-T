@@ -1,0 +1,51 @@
+<%provide(:title, @camp.title)%>
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+      <% if @camp.picture? %>
+        <%= image_tag @camp.picture, class: "img-camps"%>
+      <% else %>
+        <%= image_tag('tennis.jpg', class: "img-camps")%>
+      <% end %>
+    <h3 class="participators">Participators:</h3>
+    <div class="participators_img">
+        <% @participators.each do |user| %>
+          <%=link_to (image_tag user.icon, class:"mini_icon", size: "30"), user%>
+        <% end %>
+    </div>
+  </div>
+</div>
+
+
+<h3><%= @camp.title %></h3>
+
+<p>
+  <strong>Venue:</strong>
+  <%= @camp.venue %>
+</p>
+
+<p>
+  <strong>Intro:</strong>
+  <%= @camp.intro %>
+</p>
+
+<p>
+  <strong>Time:</strong>
+  <%= @camp.time %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @camp.user_id %>
+</p>
+
+<p>
+  <strong>Picture:</strong>
+  <%= @camp.picture %>
+</p>
+
+<%= link_to 'Back', camps_path, class: "btn btn-default btn-sm" %> |
+<% if current_user && current_user == @camp.user%>
+  <%= link_to 'Edit', edit_camp_path(@camp), class: "btn btn-danger btn-sm" %> |
+  <%= link_to 'delete', camp_path(@camp), method: :delete, data: {confirm: "Are you suer?"}, class: "btn btn-danger btn-sm"%>
+<% end %>

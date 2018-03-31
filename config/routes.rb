@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :camps
   root 'static_pages#home'
 
   post '/fake_login', to: 'application#fake_login'

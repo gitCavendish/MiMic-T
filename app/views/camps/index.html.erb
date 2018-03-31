@@ -1,0 +1,53 @@
+<% provide(:title, "Camps")%>
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <%= image_tag "color_run.png", class: "img-camps"%>
+    <h1 class="display-4">Camps Around the Wrold</h1>
+    <p class="lead"><small>Quo vel sed ratione repudiandae libero dolore voluptatem. Voluptatibus dolorem aut minima tempora. Id repellat magnam distinctio velit vel. Sit aut quos.</small></p>
+  </div>
+  <% if current_user %>
+    <%= link_to 'Initiate a Camp', new_camp_path, class: "btn btn-info btn-md" %>
+  <% end %>
+</div>
+
+<p id="notice"><%= notice %></p>
+<div class="camps-container" style="width: 100%">
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th class="camp-titles">Title</th>
+      <th class="camp-venues">Venue</th>
+      <th class="camp-intros">Intro</th>
+      <th class="camp-times">Time</th>
+      <th class="camp-users">Initiator</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @camps.each do |camp| %>
+      <tr>
+        <td class="camp-titles"><strong><%=link_to camp.title, camp %></strong></td>
+        <td class="camp-venues"><%= camp.venue %></td>
+        <td class="camp-intros"><%= camp.intro.truncate(45) %></td>
+        <td class="camp-times"><%= camp.time.to_formatted_s(:short)  %></td>
+        <td class="camp-users">
+          <% if camp.user && camp.user.icon? %>
+            <%=link_to (image_tag camp.user.icon, class:"mini_icon", size: "30"), camp.user%>
+          <% else %>
+            <%= camp.user.name if camp.user%>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% if current_user %>
+  <%= link_to 'Initiate a Camp', new_camp_path, class: "btn btn-info btn-md" %>
+<% end %>
+</div>
+
+<%= will_paginate %>

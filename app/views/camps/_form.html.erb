@@ -1,0 +1,44 @@
+<%= form_with(model: camp, local: true) do |form| %>
+  <% if camp.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(camp.errors.count, "error") %> prohibited this camp from being saved:</h2>
+
+      <ul>
+      <% camp.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :camp_title, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :venue %>
+    <%= form.text_field :venue, id: :camp_venue, class: "form-control"  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :intro %>
+    <%= form.text_area :intro, id: :camp_intro, class: "form-control"  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :time %>
+    <%= form.datetime_field :time, id: :camp_time, class: "form-control"  %>
+  </div>
+
+  <div class="field">
+    <label for="file-upload" class="custom-file-upload">
+       <i class="material-icons md-48" style="color: tomato;">add_a_photo</i>Upload a picture.
+       <%= form.file_field :picture, id: :camp_picture, class: "btn btn-secondary btn-md", id: "file-upload"%>
+    </label>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

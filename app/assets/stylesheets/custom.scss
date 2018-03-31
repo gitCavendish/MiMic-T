@@ -426,16 +426,58 @@ i#post_likes.material-icons {
   display: block;
 }
 
+// remove right blank in pages
 
-// hidden hot posts  ----------------------------------------------------------
-
-@media only screen and (max-width: 1000px) {
-  .hot_post {
-    display: none;
-  }
-
-
+.row {
+  margin-left: 0;
+  margin-right: 0;
 }
+
+
+// camps index
+
+.img-camps{
+  width: 100%
+}
+
+.camps-container {
+  overflow: auto;
+  display: block;
+}
+
+.jumbotron {
+  text-align: center;
+  padding: 10px 0 15px 0;
+  .lead {
+    font-size: 16px;
+  }
+}
+
+.camp-users {
+  img {
+    border-radius: 100%;
+  }
+}
+
+// camp show
+
+.participators_img {
+  margin: 10px 0 0 0;
+  padding: 0 150px;
+}
+.participators_img img {
+  border-radius: 100%;
+  margin: 2px 1px;
+}
+
+.participators {
+  margin-top: 5px;
+  color: tomato;
+  font-weight:800;
+}
+
+
+
 
 
 // hidden hot posts  ----------------------------------------------------------
@@ -449,41 +491,53 @@ i#post_likes.material-icons {
     height:inherit;
   }
 
+}
+
+// hidden hot posts  ----------------------------------------------------------
+
+@media only screen and (max-width: 1000px) {
+  .hot_post {
+    display: none;
+  }
 
 
-
+}
 
 // hide nav & show toggle button in small screen -------------------------------
 
 @media (max-width: 768px) {
 
-.toggle {
+  .toggle {
+        display: block;
+     }
+
+  nav {
+    ul {
+    width: 100%;
+    display: none;
+    li {
       display: block;
+      text-align: center;
+    }
    }
-nav {
-  ul {
-  width: 100%;
-  display: none;
-  li {
-    display: block;
-    text-align: center;
   }
- }
+
+  .active {
+    display: block !important;
+  }
+
+  .post_info {
+    text-align: justify;
+    width: 100%
+  }
+
+  .camp-intros {
+    display: none;
+  }
+
 }
 
-.active {
-  display: block !important;
-}
 
-
-.post_info {
-  text-align: justify;
-  width: 100%
-}
-}
-
-
-}
 
 // xs device ------------------------------------------------------------------
 
@@ -494,4 +548,9 @@ nav {
       margin: 0;
     }
   }
+
+.camp-users, .camp-venues {
+  display: none;
+}
+
 }

@@ -46,6 +46,15 @@ Micropost.all.each do |micropost|
  end
 end
 
+20.times do |n|
+  Camp.create(user_id: User.all.sample.id,
+              title: Faker::Lorem.sentence,
+              venue: Faker::Address.street_address,
+              intro: Faker::Lorem.paragraph(rand(5..10)),
+              time: Faker::Time.forward(60, :morning),
+              picture: open('app/assets/images/color_run.png'),
+  )
+end
 
 
 # following relationships
