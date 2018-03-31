@@ -342,7 +342,7 @@ nav {
       list-style: none;
       padding: 10px 30px;
       &:hover {
-        background: tomato;
+        background: lightgrey;
       }
       a {
         color: white;
@@ -477,7 +477,28 @@ i#post_likes.material-icons {
 }
 
 
+// inform message renewing
 
+.dropdown-menu {
+    width: 280px !important;
+    height: 400px !important;
+}
+
+.informing_msg {
+  ul {
+    overflow: auto;
+    height: 30em;
+    li {
+      text-align: left;
+      padding: 5px 0;
+      font-size: 10px
+    }
+  }
+}
+
+#nav-msg {
+  
+}
 
 
 // hidden hot posts  ----------------------------------------------------------
@@ -493,9 +514,20 @@ i#post_likes.material-icons {
 
 }
 
+
+
+@media only screen and (max-width: 1200px) {
+  .informing_msg {
+    display: none;
+  }
+
+}
+
+
+
 // hidden hot posts  ----------------------------------------------------------
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 992px) {
   .hot_post {
     display: none;
   }
@@ -526,6 +558,10 @@ i#post_likes.material-icons {
     display: block !important;
   }
 
+  .hide {
+    display: none;
+  }
+
   .post_info {
     text-align: justify;
     width: 100%
@@ -537,6 +573,11 @@ i#post_likes.material-icons {
 
   .btn-participate {
     margin-bottom: 0px;
+  }
+
+  .dropdown-menu {
+      width: 100%;
+      height: 100%;
   }
 
 }

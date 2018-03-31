@@ -6,8 +6,10 @@ class CommentsController < ApplicationController
   def create
 #    debugger
     if !params[:comment][:message].blank?
-      @comment = Comment.new(micropost_id: params[:id], user_id: current_user.id)
+      micropost = Micropost.find(params[:id])
+      @comment = Comment.new(micropost_id: micropost.id, user_id: current_user.id)
       @comment.message = params[:comment][:message]
+      @comment.send_to = micropost.user.id
       if @comment.save
         flash[:success] = "Created comment successfully."
       else

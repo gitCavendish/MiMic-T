@@ -12,19 +12,55 @@
       <% end %>
       <li><%= link_to "Camps", camps_path %></li>
       <% if current_user %>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account
+      <li class="dropdown dropdown-account">
+        <a>Account
           <b class="caret"></b>
         </a>
-          <ul class="dropdown-menu" id="dropdown-ul">
+          <ul class="dropdown-menu dropdown-menu-account" id="dropdown-ul">
             <li><%= link_to "My page", current_user %></li>
             <li><%= link_to "Settings", edit_user_path(current_user) %></li>
             <li><%= link_to "Log out", logout_path, method: :delete %></li>
           </ul>
       </li>
+
+      <li class="dropdown informing_msg">
+        <i class="material-icons inform-icon" style="color: white;">local_post_office</i>
+        <span class="label label-danger"><%= unread_messages.count%></span>
+          <ul class="dropdown-menu dropdown-menu-msg" id="dropdown-ul">
+            <% unread_messages.each do |msg|%>
+              <li>
+                 <%= link_to ("comment from "+ msg.user.name), msg.micropost %>
+              </li>
+            <% end %>
+          </ul>
+      </li>
+
+
       <% else %>
         <li><%= link_to "Log in", login_path%></li>
         <li><%= link_to "Signup", signup_path%></li>
       <% end %>
   </ul>
 </nav>
+
+
+<style>
+.inform-icon {
+  padding: 0;
+  margin: 0;
+  font-size: 14px
+}
+</style>
+<script>
+  $(".dropdown-account").click(function(){
+    $(".dropdown-menu-account").toggleClass("active")
+  });
+
+  $(".informing_msg").click(function(){
+    $(".dropdown-menu-msg").toggleClass("active")
+  });
+
+  $(".dropdown-menu").mouseleave(function(){
+    $(this).toggleClass("active");
+  })
+</script>

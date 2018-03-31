@@ -29,8 +29,8 @@ end
                password: password,
                password_confirmation: password,
                activated: true,
-               activated_at: Time.zone.now,
-               remote_icon_url: "http://placebeard.it/g/200/200"
+               activated_at: Time.zone.now
+               # remote_icon_url: "http://placebeard.it/g/200/200"
               )
 end
 
@@ -40,10 +40,16 @@ users = User.order(:created_at).take(6)
   users.each { |user| user.microposts.create!(content: content) }
 end
 
+read_or_not = [true, false]
+
 Micropost.all.each do |micropost|
  rand(1..6).times do
-   micropost.buckets.create(remote_picture_url: "https://placeimg.com/200/200/any")
-   micropost.comments.create(user_id: User.all.ids.sample, message: Faker::Lorem.sentence)
+   #micropost.buckets.create(remote_picture_url: "https://placeimg.com/200/200/any")
+   micropost.comments.create(user_id: User.all.ids.sample,
+                             send_to: micropost.user.id,
+                             message: Faker::Lorem.sentence,
+                             been_read: read_or_not.sample
+                            )
    micropost.likes.create(user_id: User.all.ids.sample)
  end
 end
