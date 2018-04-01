@@ -9,4 +9,4 @@
   <%= render @users %>
 </ul>
 
-<%= will_paginate %>
+<%= will_paginate @users, :inner_window => 2 %>

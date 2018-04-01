@@ -39,7 +39,7 @@
         <%= render @microposts %>
       </ol>
 
-      <%= will_paginate @microposts %>
+      <%= will_paginate @microposts, :inner_window => 2 %>
     <% end %>
   </div>
 </div>
