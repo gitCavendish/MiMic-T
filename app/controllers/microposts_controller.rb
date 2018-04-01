@@ -6,20 +6,23 @@ class MicropostsController < ApplicationController
   def create
     @micropost = current_user.microposts.build(micropost_params)
 
-    if @micropost.save
-      if params[:micropost][:bucket]
+    if params[:micropost][:bucket]
+      if params[:micropost][:bucket][:picture].size > 6
+        flash[:warning] = "Too many photos, maximum 6"
+      else
+        @micropost.save
         params[:micropost][:bucket][:picture].each do |pic|
           @micropost.buckets.create(picture: pic)
         end
+        flash[:success] = "Micropost created!"
       end
-      flash[:success] = "Micropost created!"
-      redirect_to root_url
     else
-      @feed_items = []
-      flash[:warning] = "Invalid format, plaese try again."
-      redirect_back(fallback_location: root_url)
+      @micropost.save
+      flash[:success] = "Micropost created!"
     end
+    redirect_back(fallback_location: root_url)
   end
+
 
   def destroy
     @micropost.destroy
