@@ -1,3 +1,4 @@
 new_comment_body = "<%=j render "microposts/comment", micropost: @comment.micropost %>"
 $("#comments-<%= @comment.micropost.id%>").parent().html(new_comment_body);
-$("#comments-<%= @comment.micropost.id%>").parent().css("display", "block")
+$("#comments-<%= @comment.micropost.id%>").parent().css("display", "block");
+$("#comment-<%= @comment.micropost.id%>-here").val('');

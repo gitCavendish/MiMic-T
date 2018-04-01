@@ -1,12 +1,12 @@
 <div class="row comments_body" id="comments_body-<%= micropost.id%>">
   <ul id="comments-<%= micropost.id%>">
-      <% micropost.comments.each do |comment|%>
+      <% micropost.comments.asc.each do |comment|%>
         <li><span><%= link_to comment.user.name, comment.user %>: </span><%= comment.message.truncate(40)%></li>
       <% end %>
   </ul>
 
   <%= form_for :comment, url: comments_path(micropost), method: :post, remote: true do |f|%>
-    <%= f.text_area :message, class: "form-control", placeholder: "leave a comment"%>
+    <%= f.text_area :message, class: "form-control", placeholder: "leave a comment", id: "comment-#{micropost.id}-here"%>
     <%= f.submit "Submit", class: "btn btn-small btn-default"%>
   <% end %>
 </div>
