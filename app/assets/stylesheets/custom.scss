@@ -463,7 +463,7 @@ i#post_likes.material-icons {
 
 .participators_img {
   margin: 10px 0 0 0;
-  padding: 0 150px;
+  padding: 0 10px;
 }
 .participators_img img {
   border-radius: 100%;
@@ -481,7 +481,8 @@ i#post_likes.material-icons {
 
 .dropdown-menu {
     width: 280px !important;
-    height: 400px !important;
+    height: auto !important;
+    max-height: 400px;
 }
 
 .informing_msg {
@@ -496,8 +497,14 @@ i#post_likes.material-icons {
   }
 }
 
-#nav-msg {
-  
+.inform-icon {
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+}
+
+nav i {
+  color: white;
 }
 
 
@@ -512,14 +519,15 @@ i#post_likes.material-icons {
     height:inherit;
   }
 
+
+
 }
 
 
 
 @media only screen and (max-width: 1200px) {
-  .informing_msg {
-    display: none;
-  }
+
+
 
 }
 
@@ -532,6 +540,9 @@ i#post_likes.material-icons {
     display: none;
   }
 
+  .informing_msg {
+    display: none;
+  }
 
 }
 
@@ -578,6 +589,11 @@ i#post_likes.material-icons {
   .dropdown-menu {
       width: 100%;
       height: 100%;
+  }
+
+
+  .notification-text {
+    display:  none;
   }
 
 }

@@ -31,7 +31,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :comments
+  resources :comments do
+    collection do
+      post 'read_all'
+    end
+  end
 
   resources :users do
     member do
@@ -40,6 +44,8 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
+
+  get '/notifications', to: 'users#notifications'
 
   resources :relationships, only: [:create, :destroy]
 end

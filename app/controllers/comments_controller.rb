@@ -1,5 +1,8 @@
 class CommentsController < ApplicationController
+  include CommentsHelper
+
   before_action :logged_in_user
+  helper_method :unread_messages
   def new
   end
 
@@ -10,6 +13,9 @@ class CommentsController < ApplicationController
       @comment = Comment.new(micropost_id: micropost.id, user_id: current_user.id)
       @comment.message = params[:comment][:message]
       @comment.send_to = micropost.user.id
+      if micropost.user_id == current_user.id
+        @comment.been_read = true
+      end
       if @comment.save
         flash[:success] = "Created comment successfully."
       else
@@ -20,6 +26,13 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+  end
+
+  def read_all
+    unread_messages.each do |comment|
+      comment.toggle!(:been_read)
+    end
+    redirect_back(fallback_location: root_url)
   end
 
   private

@@ -1,0 +1,25 @@
+<br>
+<%= link_to "Mark all as read.", read_all_comments_path, method: :post, class: "btn btn-block btn-default" %>
+<table class="table table-hover">
+  <tr>
+      <th>From:</th>
+      <th class="notification-text">Comment:</th>
+      <th class="notification-on">On:</th>
+  </tr>
+  <% @notifications.each do |noti|%>
+  <tr>
+    <td>
+      <%= link_to noti.user.name, noti.user %>
+      <br><span><%= noti.created_at.to_formatted_s(:short)%></span>
+    </td>
+    <td class="notification-text"><%= noti.message.truncate(40) %></td>
+    <td class="notification-on">
+      <%= link_to micropost_path(noti.micropost) do %>
+        <%= image_tag noti.micropost.buckets[0].picture, size: "30"%>
+        <%= noti.micropost.content.truncate(20) %>
+      <% end %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<%= link_to "Mark all as read.", read_all_comments_path, method: :post, class: "btn btn-block btn-default" %>

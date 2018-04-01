@@ -1,6 +1,6 @@
 class MicropostsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
-  before_action :correct_user, only: :destroy
+  before_action :correct_user, only: [:destroy, :show]
 
 
   def create
@@ -25,6 +25,10 @@ class MicropostsController < ApplicationController
     flash[:success] = "Micropost delete"
     #redirect_to request.referrer || root_url
     redirect_back(fallback_location: root_url)
+  end
+
+  def show
+    @micropost.comments.where("been_read = ?", false).each { |c| c.toggle!(:been_read) }
   end
 
   private

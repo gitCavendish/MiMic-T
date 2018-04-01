@@ -24,17 +24,30 @@
       </li>
 
       <li class="dropdown informing_msg">
-        <i class="material-icons inform-icon" style="color: white;">local_post_office</i>
-        <span class="label label-danger"><%= unread_messages.count%></span>
-          <ul class="dropdown-menu dropdown-menu-msg" id="dropdown-ul">
-            <% unread_messages.each do |msg|%>
-              <li>
-                 <%= link_to ("comment from "+ msg.user.name), msg.micropost %>
-              </li>
-            <% end %>
-          </ul>
-      </li>
+        <i class="material-icons inform-icon">local_post_office</i>
 
+        <% if !unread_messages.empty?%>
+          <span class="label label-danger"><%= unread_messages.count%></span>
+          <ul class="dropdown-menu dropdown-menu-msg" id="dropdown-ul">
+            <li><%= link_to "Mark all as read.", read_all_comments_path, method: :post %></li>
+              <% unread_messages.each do |msg|%>
+                <li>
+                    <%= link_to micropost_path(msg.micropost) do %>
+                      New comment from: <%= msg.user.name %>
+                      <br>on:<%= msg.micropost.content.truncate(20)%>
+                      <%= image_tag msg.micropost.buckets[0].picture, size: "20"%>
+                    <% end %>
+                </li>
+              <% end %>
+              <li><%= link_to "Check All", notifications_path%></li>
+          </ul>
+        <% else %>
+            <ul class="dropdown-menu dropdown-menu-msg" id="dropdown-ul">
+              <li>No recent notification.</li>
+              <li><%= link_to "Check All", notifications_path%></li>
+            </ul>
+        <% end %>
+      </li>
 
       <% else %>
         <li><%= link_to "Log in", login_path%></li>
@@ -44,23 +57,16 @@
 </nav>
 
 
-<style>
-.inform-icon {
-  padding: 0;
-  margin: 0;
-  font-size: 14px
-}
-</style>
 <script>
-  $(".dropdown-account").click(function(){
-    $(".dropdown-menu-account").toggleClass("active")
-  });
+$(".dropdown-account").click(function(){
+  $(".dropdown-menu-account").toggleClass("active")
+});
 
-  $(".informing_msg").click(function(){
-    $(".dropdown-menu-msg").toggleClass("active")
-  });
+$(".informing_msg").click(function(){
+  $(".dropdown-menu-msg").toggleClass("active")
+});
 
-  $(".dropdown-menu").mouseleave(function(){
-    $(this).toggleClass("active");
-  })
+$(".dropdown-menu").mouseleave(function(){
+  $(this).toggleClass("active");
+})
 </script>

@@ -6,6 +6,7 @@ class CampsController < ApplicationController
   # GET /camps.json
   def index
     @camps = Camp.order(created_at: 'desc').paginate(page: params[:page], per_page: 10)
+    @first_camp = Camp.first
   end
 
   # GET /camps/1

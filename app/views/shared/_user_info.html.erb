@@ -1,6 +1,6 @@
 <% if current_user %>
   <%= link_to current_user do %>
-  <%= image_tag(current_user.icon, size: 100)%>
+  <%= image_tag(current_user.icon, size: 150)%>
     <h1><%= current_user.name %> <label class="label label-danger"> Admin</label></h1>
     <% if current_user.admin? %>
 

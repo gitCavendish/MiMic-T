@@ -4,6 +4,7 @@ class StaticPagesController < ApplicationController
   end
 
   def home
+    @camp = Camp.first
     if current_user
       @micropost = current_user.microposts.new if current_user
       @feed_items = current_user.feed.paginate(page: params[:page], :per_page => 8)

@@ -88,6 +88,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def notifications
+    @notifications = Comment.where("send_to = ?", current_user.id).order(created_at: 'desc')
+  end
+
     private
 
     def admin_user

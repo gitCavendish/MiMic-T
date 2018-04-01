@@ -2,7 +2,9 @@
 
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <%= image_tag "color_run.png", class: "img-camps"%>
+    <%= link_to camp_path(@first_camp) do %>
+      <%= image_tag 'color_run.png', class: "img-camps"%>
+    <% end %>
     <h1 class="display-4">Camps Around the Wrold</h1>
     <p class="lead"><small>Quo vel sed ratione repudiandae libero dolore voluptatem. Voluptatibus dolorem aut minima tempora. Id repellat magnam distinctio velit vel. Sit aut quos.</small></p>
   </div>
