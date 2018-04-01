@@ -1,4 +1,4 @@
-
+<div class="post-<%= micropost.id%>">
   <%= link_to image_tag(micropost.user.icon, size: 50), micropost.user, class: "mini_icon" %>
   <span class="user"><%= link_to micropost.user.name, micropost.user%></span>
   <span class="content"><%= micropost.content %></span>
@@ -17,7 +17,7 @@
     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
     <p><%= link_to "See more details", micropost %></p>
     <% if current_user?(micropost.user)%>
-        <%= link_to 'delete', micropost_path(micropost), method: :delete, data: {confirm: "You sure?"}%>
+        <%= link_to 'delete', micropost_path(micropost), method: :delete, remote: true, data: {confirm: "You sure?"}%>
     <% end %>
     </div>
 
@@ -45,22 +45,11 @@
     </div>
   </div>
 
-    <div class="row comments_body" id="comments_body-<%= micropost.id%>">
-      <ul id="comments-<%= micropost.id%>">
-          <% micropost.comments.last(5).each do |comment|%>
-            <li><span><%= link_to comment.user.name, comment.user %>: </span><%= comment.message.truncate(40)%></li>
-          <% end %>
-          <span><%= link_to "Check all", micropost %></span>
-
-      </ul>
-      <%= form_for :comment, url: comments_path(micropost), method: :post do |f|%>
-        <%= f.text_area :message, class: "form-control", placeholder: "leave a comment"%>
-        <%= f.submit "Submit", class: "btn btn-small btn-default"%>
-      <% end %>
-    </div>
+<%= render "microposts/comment", micropost: micropost %>
 
 
 <hr>
+</div>
 
 
 <script>

@@ -19,10 +19,12 @@ class CommentsController < ApplicationController
       if @comment.save
         flash[:success] = "Created comment successfully."
       else
-        flash[:warning] = "Comment too short! Please try again."
+        @comment.errors.add(:comment, "too short, try again.")
       end
     end
-    redirect_back_or root_url
+    respond_to do |format|
+      format.js
+    end
   end
 
   def destroy

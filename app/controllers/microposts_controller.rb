@@ -26,9 +26,10 @@ class MicropostsController < ApplicationController
 
   def destroy
     @micropost.destroy
-    flash[:success] = "Micropost delete"
-    #redirect_to request.referrer || root_url
-    redirect_back(fallback_location: root_url)
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_url)}
+      format.js
+    end
   end
 
   def show
@@ -44,7 +45,6 @@ class MicropostsController < ApplicationController
 
     def correct_user
       @micropost = current_user.microposts.find_by(id: params[:id])
-      flash[:danger] = "Permission denied."
       redirect_to root_url if @micropost.nil?
     end
 
