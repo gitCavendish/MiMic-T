@@ -3,7 +3,7 @@ class Micropost < ApplicationRecord
   has_many :buckets, dependent: :destroy
   default_scope -> { order(created_at: :desc) }
   validates :user_id, presence: true
-  validates :content, presence: true, length: { maximum: 300 }
+  validates :content, presence: true, length: 5..300
   accepts_nested_attributes_for :buckets
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy

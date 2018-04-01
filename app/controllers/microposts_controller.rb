@@ -16,7 +16,8 @@ class MicropostsController < ApplicationController
       redirect_to root_url
     else
       @feed_items = []
-      render 'static_pages/home'
+      flash[:warning] = "Invalid format, plaese try again."
+      redirect_back(fallback_location: root_url)
     end
   end
 
