@@ -3,8 +3,8 @@
   <%= render 'shared/feed'%>
   <div>
       <% if !current_user %>
-        <%= link_to "Sign Up Now!", signup_path, class: "btn btn-lg btn-primary"%>
-        <%= link_to "Login as a sample user to explore more...", fake_login_path, method: :post,class: "btn btn-lg btn-danger"%>
+        <%= link_to "Sign Up Now!", signup_path, class: "btn btn-sm btn-primary"%>
+        <%= link_to "Login as a sample user to explore more...", fake_login_path, method: :post,class: "btn btn-sm btn-danger"%>
       <% elsif current_user && (current_user.microposts.size < 3)  %>
         <h1>Welcome to MiMiC-T</h1>
         <p>Try post some microposts or photos.Enjoy yourself!</p>

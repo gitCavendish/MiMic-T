@@ -15,7 +15,9 @@
     <td class="notification-text"><%= noti.message.truncate(40) %></td>
     <td class="notification-on">
       <%= link_to micropost_path(noti.micropost) do %>
-        <%= image_tag noti.micropost.buckets[0].picture, size: "30"%>
+        <% if noti.micropost.buckets.any? %>
+          <%= image_tag noti.micropost.buckets[0].picture, size: "30"%>
+        <% end %>
         <%= noti.micropost.content.truncate(20) %>
       <% end %>
     </td>
