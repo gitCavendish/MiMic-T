@@ -55,7 +55,7 @@
 <% elsif current_user && !current_user.participated_camps.include?(@camp)%>
   <%= link_to "Participate", participate_camp_path(@camp), method: :post, class: "btn btn-warning btn-sm"%>
 <% elsif current_user && current_user.participated_camps.include?(@camp) %>
-  <%= link_to "Quit Camp", quit_camp_path(@camp), method: :delete, class: "btn btn-default btn-sm"%>
+  <%= link_to "Quit Camp", quit_camp_path(@camp), method: :delete, class: "btn btn-default btn-sm"%> You are in!
 <% else %>
   <%= link_to "Login for participating", login_path, class: "btn btn-warning btn-md"%>
 <% end %>

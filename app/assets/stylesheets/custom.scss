@@ -508,6 +508,20 @@ nav i {
 }
 
 
+.camp-aside {
+  margin: 5px 0;
+  padding: 0px 10px 10px 20px
+}
+
+.upcoming-camps {
+  background-color: rgb(240, 240, 240);
+}
+
+
+
+
+
+
 // hidden hot posts  ----------------------------------------------------------
 
 @media only screen and (max-width: 1366px) {
@@ -543,6 +557,11 @@ nav i {
   .informing_msg {
     display: none;
   }
+
+  .upcoming-camps {
+    display: none;
+  }
+
 
 }
 

@@ -10,6 +10,26 @@
     <section class="stats">
       <%= render 'shared/stats'%>
     </section>
+
+    <h4>Participated Camps:</h4>
+    <% if !@participated_camps.empty? %>
+    <section >
+      <div class="user-camps">
+        <hr>
+          <% @participated_camps.each do |camp|%>
+            <%= link_to camp_path(camp) do %>
+            <div class="camp-aside">
+              <%= image_tag camp.picture, size: 30, class: "mini_icon" %>
+              <%= camp.title.truncate(15)%>
+            </div>
+            <% end %>
+          <% end %>
+      </div>
+    </section>
+    <% else %>
+    <p>No participated camps.</p>
+    <% end %>
+
   </aside>
   <div class="col-md-8">
     <% if @user.microposts.any? %>

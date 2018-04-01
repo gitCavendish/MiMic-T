@@ -16,7 +16,26 @@
             <span><%= link_to post.user.name, post.user %>: </span>
             <p><small><%= post.content.truncate(70)%></small></p>
           <% end %>
-        </details>
+      </div>
+    </section>
+
+    <h4 class="upcoming-camps">Upcoming camps:</h4>
+    <section >
+
+      <div class="upcoming-camps">
+        <hr>
+          <% Camp.last(10).each do |camp|%>
+            <%= link_to camp_path(camp) do %>
+            <div class="camp-aside">
+              <%= image_tag camp.picture, size: 30, class: "mini_icon" %>
+              <%= camp.title.truncate(15)%>
+            </div>
+            <% end %>
+          <% end %>
       </div>
     </section>
 </aside>
+
+<style>
+
+</style>
