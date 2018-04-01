@@ -1,6 +1,6 @@
 class MicropostsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
-  before_action :correct_user, only: [:destroy, :show]
+  before_action :correct_user, only: [:destroy]
 
 
   def create
@@ -29,6 +29,7 @@ class MicropostsController < ApplicationController
   end
 
   def show
+    @micropost = Micropost.find(params[:id])
     @micropost.comments.where("been_read = ?", false).each { |c| c.toggle!(:been_read) }
   end
 
@@ -40,6 +41,7 @@ class MicropostsController < ApplicationController
 
     def correct_user
       @micropost = current_user.microposts.find_by(id: params[:id])
+      flash[:danger] = "Permission denied."
       redirect_to root_url if @micropost.nil?
     end
 
