@@ -35,7 +35,7 @@ end
 end
 
 users = User.order(:created_at).take(6)
-10.times do
+6.times do
   content = Faker::Lorem.paragraph(rand(1..3))
   users.each { |user| user.microposts.create!(content: content) }
 end
@@ -44,7 +44,7 @@ read_or_not = [true, false]
 
 Micropost.all.each do |micropost|
  rand(1..6).times do
-   micropost.buckets.create(remote_picture_url: "https://placeimg.com/200/200/any")
+   micropost.buckets.create(remote_picture_url: "https://placeimg.com/400/300/any")
    micropost.comments.create(user_id: User.all.ids.sample,
                              send_to: micropost.user.id,
                              message: Faker::Lorem.sentence,

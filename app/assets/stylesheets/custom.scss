@@ -269,7 +269,7 @@ img#color_run {
     img {
       display: block;
       padding: 5px 0;
-      margin-top: 5px;
+      margin-top: 10px;
     }
   }
   .timestamp {
@@ -281,6 +281,12 @@ img#color_run {
     float: left;
     margin-right: 10px;
     margin-top: 5px;
+  }
+}
+
+.post-images {
+  img {
+    margin: 3px 2px;
   }
 }
 

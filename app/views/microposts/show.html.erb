@@ -5,9 +5,9 @@
   <% if !@micropost.buckets.blank? %>
       <% @micropost.buckets.each do |bucket|%>
         <% if bucket.picture%>
-          <div class="home_page_image">
-             <%= image_tag bucket.picture, size: '150x150', id: "image-#{bucket.id}"   %>
-          </div>
+          <%= link_to path_to_image(bucket.picture), data: { fancybox: "gallery", caption: "#{@micropost.content}" } do %>
+            <%= image_tag bucket.picture, size: '150x150', id: "image-#{bucket.id}" %>
+          <% end %>
         <% end %>
       <% end %>
   <% end %>
