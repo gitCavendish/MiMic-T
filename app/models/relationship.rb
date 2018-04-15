@@ -8,10 +8,10 @@ class Relationship < ApplicationRecord
 
   private
 
-  def self_referential_not_allowed
-    if self.followed_id == self.follower_id
-      errors.add(:self_refer, "can't follow yourself.")
+    def self_referential_not_allowed
+      if self.followed_id == self.follower_id
+        errors.add(:self_refer, "can't follow yourself.")
+      end
     end
-  end
 
 end

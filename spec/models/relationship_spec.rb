@@ -8,7 +8,7 @@ RSpec.describe Relationship, type: :model do
                          password: "password")
     @user2 = User.create(name: "user2",
                          email: "user2@example.com",
-                         password: "password")
+                         password: "passwor")
   end
 
   describe "Validations" do

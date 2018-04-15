@@ -1,5 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200');
+
 
 
 // variables mixins etc
@@ -337,6 +339,7 @@ input[type="file"] {
 }
 
 nav {
+  font-family: 'Source Sans Pro', sans-serif;
   width: 100%;
   background: black;
   ul {
@@ -357,6 +360,11 @@ nav {
       }
     }
   }
+}
+
+#normal {
+  width: auto;
+  text-align: center;
 }
 
 .toggle {
