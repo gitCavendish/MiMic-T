@@ -14,13 +14,14 @@ class MicropostsController < ApplicationController
         params[:micropost][:bucket][:picture].each do |pic|
           @micropost.buckets.create(picture: pic)
         end
-        flash[:success] = "Micropost created!"
       end
     else
       @micropost.save
-      flash[:success] = "Micropost created!"
     end
-    redirect_back(fallback_location: root_url)
+    respond_to do |format|
+        format.html { redirect_back(fallback_location: root_url)}
+        format.js
+    end
   end
 
 

@@ -1,0 +1,13 @@
+$(".microposts").prepend("<%=j render 'microposts/micropost', micropost: @micropost%>");
+$("#micropost_content").val("");
+
+location.href = "/" + "#post-<%= @micropost.id%>"
+
+var $el = $("#post-<%= @micropost.id%>"),
+    x = 3500,
+    originalColor = $el.css("background");
+
+  $el.css("background", "#ffebcc");
+  setTimeout(function(){
+    $el.css("background", originalColor);
+  }, x);

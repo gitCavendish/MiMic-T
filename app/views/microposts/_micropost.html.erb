@@ -1,58 +1,59 @@
-<div class="post-<%= micropost.id%>">
-  <%= link_to image_tag(micropost.user.icon, size: 50), micropost.user, class: "mini_icon" %>
-  <span class="user"><%= link_to micropost.user.name, micropost.user%></span>
-  <span class="content"><%= micropost.content %></span>
-  <div class="post-images">
-  <% if !micropost.buckets.blank? %>
-      <% micropost.buckets.each do |bucket|%>
-        <% if bucket.picture%>
-          <%= link_to path_to_image(bucket.picture), data: { fancybox: "gallery", caption: "#{micropost.content}" } do %>
-            <%= image_tag bucket.picture, size: '150x150', id: "image-#{bucket.id}" %>
+<div class="post-main">
+  <div id="post-<%= micropost.id%>">
+    <%= link_to image_tag(micropost.user.icon, size: 50), micropost.user, class: "mini_icon" %>
+    <span class="user"><%= link_to micropost.user.name, micropost.user%></span>
+    <span class="content"><%= micropost.content %></span>
+    <div class="post-images">
+    <% if !micropost.buckets.blank? %>
+        <% micropost.buckets.each do |bucket|%>
+          <% if bucket.picture%>
+            <%= link_to path_to_image(bucket.picture), data: { fancybox: "gallery", caption: "#{micropost.content}" } do %>
+              <%= image_tag bucket.picture, size: '150x150', id: "image-#{bucket.id}" %>
+            <% end %>
           <% end %>
         <% end %>
-      <% end %>
-  <% end %>
-  </div>
-
-  <div class="post_info row">
-    <div class="timestamp col-xs-12 col-md-7">
-    Posted <%= time_ago_in_words(micropost.created_at) %> ago.
-    <p><%= link_to "See more details", micropost %></p>
-    <% if current_user?(micropost.user)%>
-        <%= link_to 'delete', micropost_path(micropost), method: :delete, remote: true, data: {confirm: "You sure?"}%>
     <% end %>
     </div>
 
-    <div class="col-xs-6 col-md-3">
-      <span><%= micropost.comments.count %> </span>
-      <i class="material-icons post_comments" id="post-comments-<%= micropost.id%>">comment</i>
-    </div>
+    <div class="post_info row">
+      <div class="timestamp col-xs-12 col-md-7">
+      Posted <%= time_ago_in_words(micropost.created_at) %> ago.
+      <p><%= link_to "See more details", micropost %></p>
+      <% if current_user?(micropost.user)%>
+          <%= link_to 'delete', micropost_path(micropost), method: :delete, remote: true, data: {confirm: "You sure?"}%>
+      <% end %>
+      </div>
 
-    <div class="col-xs-6 col-md-2">
-    <span>
-      <% if current_user %>
-          <%= link_to(like_post_user_path(micropost), method: :post, remote: true) do %>
+      <div class="col-xs-6 col-md-3">
+        <span><%= micropost.comments.count %> </span>
+        <i class="material-icons post_comments" id="post-comments-<%= micropost.id%>">comment</i>
+      </div>
+
+      <div class="col-xs-6 col-md-2">
+      <span>
+        <% if current_user %>
+            <%= link_to(like_post_user_path(micropost), method: :post, remote: true) do %>
+              <span class="likes-count-<%= micropost.id%>">
+                <%= micropost.likes.count %>
+              </span>
+              <i class="material-icons" id="post_likes">thumb_up</i>
+            <% end %>
+        <% else %>
             <span class="likes-count-<%= micropost.id%>">
               <%= micropost.likes.count %>
             </span>
             <i class="material-icons" id="post_likes">thumb_up</i>
-          <% end %>
-      <% else %>
-          <span class="likes-count-<%= micropost.id%>">
-            <%= micropost.likes.count %>
-          </span>
-          <i class="material-icons" id="post_likes">thumb_up</i>
-      <% end %>
-    </span>
+        <% end %>
+      </span>
+      </div>
     </div>
+
+  <%= render "microposts/comment", micropost: micropost %>
+
+
+  <hr>
   </div>
-
-<%= render "microposts/comment", micropost: micropost %>
-
-
-<hr>
 </div>
-
 
 <script>
 $("#post-comments-<%= micropost.id%>").click(function() {
