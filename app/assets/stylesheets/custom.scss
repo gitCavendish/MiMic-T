@@ -17,6 +17,15 @@ $gray-mediumn-light: #eaeaea;
 
 // miscellaneous
 
+.delete_user {
+  float: right;
+}
+
+.col-xs-offset-1 {
+  border-left: 1px solid rgb(240,240,240);
+  border-right: 1px solid rgb(240,240,240);
+}
+
 .debug_dump {
   clear: both;
   float: left;
@@ -247,7 +256,7 @@ input {
 
 img#color_run {
   opacity: 0.85;
-  border-radius: 10px;
+  border-radius: 8px;
   margin-top: 20px;
   width: 80%;
   height:inherit;
@@ -550,9 +559,9 @@ nav i {
 @media only screen and (max-width: 1366px) {
 
   img#color_run {
-    border-radius: 20px;
+    border-radius: 8px;
     margin-top: 20px;
-    width: 100%;
+    width: 95%;
     height:inherit;
   }
 
@@ -654,6 +663,9 @@ nav i {
 
 .camp-users, .camp-venues {
   display: none;
-}
+ }
 
+.col-xs-offset-1 {
+  border: none;
+ }
 }
